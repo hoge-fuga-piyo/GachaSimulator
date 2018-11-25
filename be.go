@@ -10,14 +10,11 @@ import (
 )
 
 func main() {
-	fmt.Printf("hello, world\n")
-
 	rand.Seed(time.Now().UnixNano())
 
 	computeProbability(0.5)
 
 	http.HandleFunc("/v1/lottery", apiRequestHandler)
-
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -52,19 +49,19 @@ func apiRequestHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func runLottery(params map[string][]string) {
-	fmt.Printf("%v\n", params)
+	const TYPE_NUM= 10;
+	probabilities := parseProbability(params, TYPE_NUM)
+	lotteryNum := parseLotteryNum(params)
 
-	probabilities := parseProbability(params)
-
-	for _, v := range probabilities {
-		fmt.Printf("%f\n", v)
+	for i := 0; i < lotteryNum; i++ {
+		lotteryResult := runLotteryOnce(probabilities)
+		fmt.Printf("%d\n", lotteryResult)
 	}
 }
 
-func parseProbability(params map[string][]string) []float64 {
-	const TYPE_NUM= 10;
+func parseProbability(params map[string][]string, maxNum int) []float64 {
 	probabilities := [] float64{}
-	for i := 0; i < TYPE_NUM; i++ {
+	for i := 0; i < maxNum; i++ {
 		key := "type" + strconv.Itoa(i + 1)
 		if len(params[key]) > 0 {
 			probability, _ := strconv.ParseFloat(params[key][0], 64)	
@@ -75,4 +72,23 @@ func parseProbability(params map[string][]string) []float64 {
 	}
 
 	return probabilities
+}
+
+func parseLotteryNum(params map[string][]string) int {
+	key := "num"
+	num, _ := strconv.Atoi(params[key][0])
+	return num
+}
+
+func runLotteryOnce(probabilities []float64) int {
+	random := rand.Float64()
+	total := 0.0
+	for index, probability := range probabilities {
+		if total <= random && total + probability > random {
+			return index
+		}
+		total += probability
+	}
+
+	return -1;
 }
