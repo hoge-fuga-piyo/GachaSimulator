@@ -12,20 +12,12 @@ import (
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
-	computeProbability(0.5)
-
 	http.HandleFunc("/v1/lottery", apiRequestHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
-func computeProbability(probability float64) bool {
-	random := rand.Float64()
-	fmt.Println(random)
-	if random < probability {
-		return true
-	} else {
-		return false
-	}
+type ResponseStruct struct {
+	Result []int	`json:"result"`
 }
 
 func apiRequestHandler(w http.ResponseWriter, r *http.Request) {
@@ -42,21 +34,29 @@ func apiRequestHandler(w http.ResponseWriter, r *http.Request) {
 	requestParams := r.URL.Query()
 
 	// ガチャ実行
-	runLottery(requestParams)
+	results := runLottery(requestParams)
 
-	// レスポンスを返還
-	json.NewEncoder(w).Encode(requestParams)
+	// レスポンス作成
+	response := ResponseStruct{}
+	for _, result := range results {
+		response.Result = append(response.Result, result)
+		fmt.Printf("%d\n", result)
+	}
+	json.NewEncoder(w).Encode(response)
 }
 
-func runLottery(params map[string][]string) {
+func runLottery(params map[string][]string) []int {
 	const TYPE_NUM= 10;
 	probabilities := parseProbability(params, TYPE_NUM)
 	lotteryNum := parseLotteryNum(params)
 
+	results := []int{}
 	for i := 0; i < lotteryNum; i++ {
 		lotteryResult := runLotteryOnce(probabilities)
-		fmt.Printf("%d\n", lotteryResult)
+		results = append(results, lotteryResult)
 	}
+
+	return results
 }
 
 func parseProbability(params map[string][]string, maxNum int) []float64 {
