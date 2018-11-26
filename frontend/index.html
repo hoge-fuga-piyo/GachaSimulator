@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>ガチャシミュレータ</title>
+    <script src="./frontend.js"></script>
+  </head>
+  <body>
+    <!-- <form action="http://192.168.3.6:8080/v1/lottery"> -->
+    <!-- <form action="http://localhost:8080/v1/lottery"> -->
+    Nの確率:<input type="text" name="type1" size="10" maxlength="10">%<br>
+    Rの確率:<input type="text" name="type2" size="10" maxlength="10">%<br>
+    SRの確率:<input type="text" name="type3" size="10" maxlength="10">%<br>
+    <input type="tel" name="num" size="3">回引く<br>
+    <input type="submit" value="チャレンジ！！" onclick="requestApi()">
+    <div id="result"></div>
+  </body>
+</html>
