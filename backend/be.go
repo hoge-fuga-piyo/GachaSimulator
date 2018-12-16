@@ -12,7 +12,7 @@ import (
 func main() {
 	rand.Seed(time.Now().UnixNano())
 
-	http.HandleFunc("/v1/lottery", apiRequestHandler)
+	http.HandleFunc("/", apiRequestHandler)
 	http.ListenAndServe(":9000", nil)
 }
 
