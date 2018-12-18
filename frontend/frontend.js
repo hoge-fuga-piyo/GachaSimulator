@@ -11,7 +11,7 @@ function runLottery() {
 function requestApi(num) {
 	return $.ajax({
 		type: 'GET',
-		url: '/v1/lottery?type1=0.5&type2=0.3&type3=0.2&num=' + num,
+		url: '/v1/lottery?type1=0.7&type2=0.2&type3=0.1&num=' + num,
 		dataType: 'json',
 	});
 }
