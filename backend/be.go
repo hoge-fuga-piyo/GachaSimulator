@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 	"net/http"
@@ -40,7 +39,6 @@ func apiRequestHandler(w http.ResponseWriter, r *http.Request) {
 	response := ResponseStruct{}
 	for _, result := range results {
 		response.Result = append(response.Result, result)
-		fmt.Printf("%d\n", result)
 	}
 	json.NewEncoder(w).Encode(response)
 }
