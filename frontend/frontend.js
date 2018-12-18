@@ -21,15 +21,11 @@ function writeResult(response) {
 	for(let i=0; i < result.length; i++) {
 		if (result[i] == 0) {
 			write_data += "N<br>"
-			console.log("N");
 		} else if (result[i] == 1) {
 			write_data += "R<br>"
-			console.log("R");
 		} else {
 			write_data += "SR<br>"
-			console.log("SR");
 		}
 	}
-	console.log(write_data);
 	$('#result').html(write_data);
 }
