@@ -1,5 +1,6 @@
 function runLottery() {
-	let api_result = requestApi().done(function(result) {
+	let num = $('#num').val();
+	let api_result = requestApi(num).done(function(result) {
 		console.log(JSON.stringify(result));
 		writeResult(JSON.stringify(result));
 	}).fail(function(result) {
@@ -7,10 +8,10 @@ function runLottery() {
 	});
 }
 
-function requestApi() {
+function requestApi(num) {
 	return $.ajax({
 		type: 'GET',
-		url: '/v1/lottery?num=10&type1=0.5&type2=0.3&type3=0.2',
+		url: '/v1/lottery?type1=0.5&type2=0.3&type3=0.2&num=' + num,
 		dataType: 'json',
 	});
 }
