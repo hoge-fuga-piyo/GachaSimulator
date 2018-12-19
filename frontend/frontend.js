@@ -18,15 +18,24 @@ function requestApi(num) {
 
 function writeResult(response) {
 	let result = JSON.parse(response).result;
-	let write_data = '';
+	let detail_data = '';
+	let num1 = 0;
+	let num2 = 0;
+	let num3 = 0;
 	for(let i=0; i < result.length; i++) {
 		if (result[i] == 0) {
-			write_data += "N<br>"
+ 			num1++;
+			detail_data += '<p>N</p>';
 		} else if (result[i] == 1) {
-			write_data += "R<br>"
+			num2++;
+			detail_data += '<p>R</p>';
 		} else {
-			write_data += "SR<br>"
+			num3++;
+			detail_data += '<p>SR</p>';
 		}
 	}
-	$('#result').html(write_data);
+	let overview_data = '<h4>結果</h4>SR ' + num3 + '<br>R ' + num2 + '<br>N ' + num1;
+	$('#resultDetail').show();
+	$('#resultOverview').html(overview_data);
+	$('#resultContent').html(detail_data);
 }

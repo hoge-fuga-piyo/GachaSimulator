@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="./frontend.css"/>
     <script src="./frontend.js"></script>
   </head>
   <body>
@@ -23,6 +24,13 @@
     <p style="text-align: center">
       <button type="submit" class="uk-button uk-button-primary" onclick="runLottery()">チャレンジ！！</button>
     </p>
-    <div id="result" style="text-align: center"></div>
+    <div id="resultOverview" style="text-align: center"></div>
+    <ul id="resultDetail" style="text-align: center" uk-accordion>
+      <li class="uk-parent">
+        <a class="uk-accordion-title" href="#">結果詳細</a>
+        <div id="resultContent" class="uk-accordion-content">
+        </div>
+      </li>
+    <ul>
   </body>
 </html>
