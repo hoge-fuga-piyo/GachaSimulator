@@ -2,15 +2,16 @@
   <head>
     <meta charset="utf-8"/>
     <title>ガチャシミュレータ</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit-icons.min.js"></script>
     <script src="./frontend.js"></script>
   </head>
   <body>
+    <h2 style="text-align: center">ガチャシミュレータ</h2>
     <p style="text-align: center">
-      <select name="num" id="num">
+      <select name="num" id="num" class="uk-select uk-form-width-xsmall">
           <option value="10">10</option>
           <option value="20">20</option>
           <option value="30">30</option>
@@ -20,7 +21,7 @@
     回引く
     </p>
     <p style="text-align: center">
-      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="runLottery()">チャレンジ！！</button>
+      <button type="submit" class="uk-button uk-button-primary" onclick="runLottery()">チャレンジ！！</button>
     </p>
     <p style="text-align: center">
       <div id="result"></div>
